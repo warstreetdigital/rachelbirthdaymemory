@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Rachel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --deep-purple:#1e1330;
+  --royal-purple:#3d2c5a;
+  --soft-purple:#6e5aa3;
+  --light-lav:#d9d2f3;
+  --text:#f4f1ff;
+  --muted:#b9b1d6;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Inter",system-ui;
+  background:linear-gradient(180deg,var(--deep-purple),var(--royal-purple));
+  color:var(--text);
+}
+
+.container{
+  max-width:620px;
+  margin:auto;
+  padding:50px 22px 120px;
+}
+
+/* CARD BASE */
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:28px;
+  padding:36px 26px;
+  margin-bottom:50px;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.card h3{
+  font-size:13px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:24px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  margin:0;
+}
+.hero p{
+  margin-top:12px;
+  letter-spacing:3px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* SLIDESHOW */
+.rail{
+  display:flex;
+  gap:22px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.rail::-webkit-scrollbar{display:none}
+.rail img{
+  width:300px;
+  height:400px;
+  object-fit:cover;
+  border-radius:24px;
+  scroll-snap-align:center;
+  flex-shrink:0;
+}
+
+/* ZIP NOTE */
+.zip-box{
+  text-align:center;
+  padding:40px 20px;
+  border:1px dashed rgba(255,255,255,.2);
+  border-radius:20px;
+  cursor:pointer;
+  transition:.3s ease;
+}
+.zip-box:hover{
+  background:rgba(255,255,255,.05);
+}
+
+.hidden-note{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .6s ease;
+}
+
+.hidden-note p{
+  margin-top:20px;
+  line-height:2;
+  font-size:16px;
+}
+
+.card.unlocked .hidden-note{
+  max-height:400px;
+}
+
+/* AUDIO CARD */
+.audio-btn{
+  padding:16px 60px;
+  border-radius:60px;
+  border:1px solid rgba(255,255,255,.2);
+  background:linear-gradient(135deg,#6e5aa3,#4c3b7a);
+  color:white;
+  font-weight:600;
+  letter-spacing:4px;
+  cursor:pointer;
+  transition:.3s ease;
+}
+.audio-btn.playing{
+  background:linear-gradient(135deg,#8b75d1,#6e5aa3);
+}
+
+.lyrics{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .6s ease;
+  margin-top:30px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+.lyrics-content{
+  max-height:500px;
+  overflow-y:auto;
+  padding-top:20px;
+  line-height:2;
+  font-size:15px;
+}
+
+.audio-card.expanded .lyrics{
+  max-height:500px;
+  padding-top:20px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:60px;
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="card hero">
+  <h1>Happy Birthday Rachel</h1>
+  <p>From Tafadzwa</p>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="card">
+  <h3>MEMORIES</h3>
+  <div class="rail" id="rail">
+    <img src="rachel1.jpg">
+    <img src="rachel2.jpg">
+    <img src="rachel3.jpg">
+    <img src="rachel4.jpg">
+    <img src="rachel5.jpg">
+    <img src="rachel6.jpg">
+  </div>
+</div>
+
+<!-- ZIP NOTE -->
+<div class="card" id="zipCard">
+  <h3>BIRTHDAY SURPRISE</h3>
+  <div class="zip-box" id="zipBox">
+    📁 Birthday_Surprise.zip<br><br>
+    🔐 Click to Unzip
+  </div>
+
+  <div class="hidden-note">
+    <p>
+      Rachel, today is about celebrating your light,
+      your warmth, and the joy you bring into every space.
+      May this new year of your life overflow with laughter,
+      blessings, and beautiful surprises.
+      You are deeply appreciated — today and always.
+    </p>
+  </div>
+</div>
+
+<!-- PERSONALISED SONG -->
+<div class="card audio-card" id="audioCard">
+  <h3>PERSONALISED SONG</h3>
+  <button class="audio-btn" id="audioBtn">PLAY</button>
+  <audio id="audio" src="Rachel.mp3"></audio>
+
+  <div class="lyrics">
+    <div class="lyrics-content">
+      <strong>“Happy Day Rachel” (Tafadzwa → Rachel) Combined Lyrics</strong><br><br>
+
+      <strong>Intro</strong><br>
+      “Rachel… Tafadzwa here, wishing you the happiest birthday
+      Straight from my heart, sending joy, love, and laughter your way”<br><br>
+
+      <strong>Verse 1</strong><br>
+      “From morning light to evening glow, your smile shines so bright
+      Candles flicker, hearts are warm, celebrating you tonight
+      Every laugh, every cheer, fills the air with delight
+      Rachel, today’s your day, your happiness feels right”<br><br>
+
+      <strong>Chorus</strong><br>
+      “Makorokoto Rachel, zuva rako rinoshamisa
+      Ngatipemberere pamwe, rudo nemufaro zvizere
+      Today we dance, today we sing, happiness in the air
+      Tafadzwa anokuda, pamwoyo ndiripo ❤️”<br><br>
+
+      <strong>Verse 2</strong><br>
+      “Friends and family gather, smiles all around
+      Music fills the room, your laughter is the sound
+      Every wish, every cheer, love surrounds your way
+      Rachel, may joy and blessings follow you every day”<br><br>
+
+      <strong>Outro</strong><br>
+      “Rachel… today we celebrate you, love and laughter all around
+      Tafadzwa sends his heart, joy and blessings abound
+      Forever shine, dance, and smile, your day is here
+      Makorokoto Rachel, happiness always near ❤️”
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  A memory preserved by WarStreet Experience Model
+</div>
+
+</div>
+
+<script>
+/* SLIDESHOW */
+const rail = document.getElementById('rail');
+const images = rail.querySelectorAll('img');
+let index = 0;
+let autoplay;
+
+function scrollToImage(i){
+  const img = images[i];
+  const offset =
+    img.offsetLeft -
+    rail.offsetWidth / 2 +
+    img.offsetWidth / 2;
+  rail.scrollTo({ left: offset, behavior: "smooth" });
+}
+
+function startAutoplay(){
+  autoplay = setInterval(() => {
+    scrollToImage(index);
+    index = (index + 1) % images.length;
+  }, 2700);
+}
+
+startAutoplay();
+
+/* ZIP UNLOCK */
+const zipBox = document.getElementById('zipBox');
+const zipCard = document.getElementById('zipCard');
+
+zipBox.onclick = () => {
+  zipCard.classList.add('unlocked');
+  zipBox.innerHTML = "📂 Birthday_Surprise Opened";
+};
+
+/* AUDIO */
+const btn = document.getElementById('audioBtn');
+const audio = document.getElementById('audio');
+const audioCard = document.getElementById('audioCard');
+let playing = false;
+
+btn.onclick = () => {
+  if(!playing){
+    audio.play();
+    btn.textContent = "PAUSE";
+    btn.classList.add("playing");
+    audioCard.classList.add("expanded");
+  } else {
+    audio.pause();
+    btn.textContent = "PLAY";
+    btn.classList.remove("playing");
+  }
+  playing = !playing;
+};
+</script>
+
+</body>
+</html>
